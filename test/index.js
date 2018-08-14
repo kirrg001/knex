@@ -39,6 +39,7 @@ describe('Integration Tests', function() {
 });
 
 const config = require('./knexfile');
+
 if (config.oracledb) {
   describe('Oracledb driver tests', function() {
     this.timeout(process.env.KNEX_TEST_TIMEOUT || 5000);
@@ -48,4 +49,11 @@ if (config.oracledb) {
 
 if (config.postgres) {
   require('./unit/dialects/postgres');
+}
+
+if (config.sqlite3) {
+    describe('Sqlite driver tests', function() {
+        this.timeout(process.env.KNEX_TEST_TIMEOUT || 5000);
+        require('./unit/dialects/sqlite3');
+    });
 }
